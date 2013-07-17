@@ -26,5 +26,9 @@ table td{
 tr:hover td{
   opacity: 1;
   background-color: #f8f8f8;
-  cursor: pointer;
+}
+
+.icon-remove:hover{
+	color: red;
+	cursor: pointer;
 }
