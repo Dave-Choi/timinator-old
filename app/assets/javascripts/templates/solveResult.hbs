@@ -3,6 +3,7 @@
 		{{#if isTrashable}}
 			<span class="icon-trash" {{action "toggleTrashed"}}></span>
 		{{/if}}
+		<span class="icon-random" {{action "setScramble" scramble}} ></span>
 	</td>
 	<td>{{total}}</td>
 	{{#each times}}

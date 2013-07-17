@@ -61,6 +61,10 @@ Timinator.TimerController = Ember.Controller.extend({
     $("#chart").html("<svg></svg>");
   },
 
+  setScramble: function(scramble){
+    this.solveResult.set("scramble", scramble);
+  },
+
   plotGraph: function(){
     Timinator.SessionLogSerializer.graph("#chart svg", Timinator.SessionLogSerializer.serialize(this.get("log")));
   },
