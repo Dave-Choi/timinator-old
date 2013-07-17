@@ -21,7 +21,8 @@ Timinator.TimerController = Ember.Controller.extend({
     this.set("method", method);
 
     var solveResult = Timinator.SolveResult.create({
-      method: method
+      method: method,
+      isTrashable: false
     });
     this.set("solveResult", solveResult);
 
