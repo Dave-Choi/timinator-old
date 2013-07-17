@@ -14,7 +14,7 @@ Timinator.SessionLogSerializer = Ember.Object.create({
     */
     var i, j;
     var data = [];
-    var results = log.get("results");
+    var results = log.get("results").filterProperty("isTrashed", false); // TODO: This requires too much knowledge of the other classes.  Refactor.
     var numResults = results.length;
     
     if(numResults == 0){
@@ -51,6 +51,9 @@ Timinator.SessionLogSerializer = Ember.Object.create({
   
   graph: function(target, data){
     // TODO: This shouldn't be in this class.
+    if(!data){
+      return;
+    }
     
     // target can be specified as a selector string, or a node reference.
     $(target).parent().html("<svg></svg>"); // Don't know why, but some event handling was breaking, so nuke the node and remake it.  This isn't safe if the node isn't isolated, though.

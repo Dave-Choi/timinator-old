@@ -17,7 +17,7 @@ Timinator.SessionLog = Ember.Object.extend({
   
   meanAverage: function(step){
     // TODO: There's going to need to be some allowance here for partial solves, e.g. for when you just want to practice a specific step
-    var results = this.get("results");
+    var results = this.get("results").filterProperty("isTrashed", false);
     var i, numResults = results.length;
     var total = 0;
     for(i=0; i<numResults; i++){
@@ -29,12 +29,12 @@ Timinator.SessionLog = Ember.Object.extend({
   },
   
   totalMeanAverage: function(){
-    var results = this.get("results");
+    var results = this.get("results").filterProperty("isTrashed", false);
     var i, numResults = results.length;
     var total = 0;
     for(i=0; i<numResults; i++){
       total += results[i].get("total");
     }
     return Timinator.Math.thousandthPrecision(total / numResults) || 0;
-  }.property("results.@each.total")
+  }.property("results.@each.total", "results.@each.isTrashed")
 });

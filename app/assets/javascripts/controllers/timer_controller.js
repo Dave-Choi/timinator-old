@@ -44,7 +44,7 @@ Timinator.TimerController = Ember.Controller.extend({
     }
     return stepNames;
 
-  }.property("method.stepNames", "log.results.@each"),
+  }.property("method.stepNames", "log.results.@each", "log.results.@each.isTrashed"),
 
   isMultiStep: function(){
     return this.get("method.numSteps") > 1;
@@ -60,6 +60,14 @@ Timinator.TimerController = Ember.Controller.extend({
     this.set("log", Timinator.SessionLog.create());
     $("#chart").html("<svg></svg>");
   },
+
+  plotGraph: function(){
+    Timinator.SessionLogSerializer.graph("#chart svg", Timinator.SessionLogSerializer.serialize(this.get("log")));
+  },
+
+  replotNeeded: function(){
+    this.plotGraph();
+  }.observes("log.results.@each", "log.results.@each.isTrashed"),
 
   step: function(){
     var method = this.get("method");
@@ -89,8 +97,12 @@ Timinator.TimerController = Ember.Controller.extend({
     cancelAnimationFrame(this.get("animationHandle"));
 
     if(this.get("stepIndex") > -1){
-      log.addResult(this.get("solveResult"));
+      var oldResult = this.get("solveResult");
+      oldResult.set("isTrashable", true);
+      log.addResult(oldResult);
+
       var newResult = Timinator.SolveResult.create({
+        isTrashable: false,
         method: this.get("method")
       });
       this.set("solveResult", newResult);
@@ -98,8 +110,6 @@ Timinator.TimerController = Ember.Controller.extend({
 
     this.set("stepIndex", -1);
     this.set("time", 0);
-
-    Timinator.SessionLogSerializer.graph("#chart svg", Timinator.SessionLogSerializer.serialize(log));
   },
 
   timestep: function(){

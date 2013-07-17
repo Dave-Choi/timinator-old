@@ -1,4 +1,9 @@
-<tr>
+<tr {{bindAttr class="isTrashed"}}>
+	<td>
+		{{#if isTrashable}}
+			<span class="icon-trash" {{action "toggleTrashed"}}></span>
+		{{/if}}
+	</td>
 	<td>{{total}}</td>
 	{{#each times}}
 		<td>{{this}}</td>

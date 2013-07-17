@@ -1,4 +1,4 @@
-Timinator.SolveResult = Ember.Object.extend({
+Timinator.SolveResult = Ember.Object.extend(Timinator.Trashable, {
   method: null,
   times: null,
   scramble: "",

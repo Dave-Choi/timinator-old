@@ -28,3 +28,16 @@ tr:hover td{
   background-color: #f8f8f8;
 }
 
+.icon-trash:hover{
+	color: red;
+	cursor: pointer;
+}
+
+.is-trashed{
+	opacity: .3;
+
+  .icon-trash:hover{
+    color: green;
+    cursor: pointer;
+  }
+}
