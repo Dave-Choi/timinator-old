@@ -25,7 +25,7 @@ Timinator.SessionLog = Ember.Object.extend({
       var time = result.get("times")[step];
       total += time;
     }
-    return Timinator.Math.thousandthPrecision(total / numResults);
+    return Timinator.Math.thousandthPrecision(total / numResults) || 0;
   },
   
   totalMeanAverage: function(){
