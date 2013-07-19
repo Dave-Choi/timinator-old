@@ -23,6 +23,10 @@
 //= require timinator
 
 // for more details see: http://emberjs.com/guides/application/
-Timinator = Ember.Application.create();
+Timinator = Ember.Application.create({
+	routes: function(){
+        return this.Router.router.recognizer.names;
+    }
+});
 
 //= require_tree .
