@@ -26,7 +26,9 @@ Timinator.TimerController = Ember.Controller.extend({
     });
     this.set("solveResult", solveResult);
 
-    var log = Timinator.SessionLog.create();
+    var log = Timinator.SessionLog.create({
+      method: method
+    });
     this.set("log", log);
   },
 
@@ -58,7 +60,9 @@ Timinator.TimerController = Ember.Controller.extend({
 
   setMethod: function(method){
     this.set("method", method);
-    this.set("log", Timinator.SessionLog.create());
+    this.set("log", Timinator.SessionLog.create({
+      method: method
+    }));
     $("#chart").html("<svg></svg>");
   },
 
@@ -104,6 +108,7 @@ Timinator.TimerController = Ember.Controller.extend({
     if(this.get("stepIndex") > -1){
       var oldResult = this.get("solveResult");
       oldResult.set("isTrashable", true);
+      oldResult.set("isResolved", true);
       log.addResult(oldResult);
 
       var newResult = Timinator.SolveResult.create({

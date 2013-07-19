@@ -6,6 +6,8 @@ Timinator.SessionLog = Ember.Object.extend({
     This may call for some reorganization of the Method class, etc.
   */
   results: null,
+  method: null,
+
   init: function(){
     this._super();
     this.set("results", []);
@@ -27,6 +29,16 @@ Timinator.SessionLog = Ember.Object.extend({
     }
     return Timinator.Math.thousandthPrecision(total / numResults) || 0;
   },
+
+  meanAverages: function(){
+    var numSteps = this.get("method.stepNames.length");
+    var averages = [];
+    var i;
+    for(i=0; i<numSteps; i++){
+      averages[i] = this.meanAverage(i);
+    }
+    return averages;
+  }.property("results.@each.times.@each", "results.@each.isTrashed"),
   
   totalMeanAverage: function(){
     var results = this.get("results").filterProperty("isTrashed", false);

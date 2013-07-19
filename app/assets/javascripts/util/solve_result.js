@@ -3,6 +3,8 @@ Timinator.SolveResult = Ember.Object.extend(Timinator.Trashable, {
   times: null,
   scramble: "",
 
+  isResolved: false,
+
   init: function(){
     this.set("times", []);
 

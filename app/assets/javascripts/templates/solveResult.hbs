@@ -5,8 +5,18 @@
 			<span class="icon-random" {{action "setScramble" scramble}} ></span>
 		{{/if}}
 	</td>
-	<td>{{total}}</td>
-	{{#each times}}
-		<td>{{this}}</td>
+	<td>
+		{{total}} 
+		{{#if isResolved}}
+			({{timeDifference totalDifference}})
+		{{/if}}
+	</td>
+	{{#each d in stepDifferences}}
+		<td>
+			{{d.time}} 
+			{{#if isResolved}}
+				({{timeDifference d.diff}})
+			{{/if}}
+		</td>
 	{{/each}}
 </tr>
