@@ -1,22 +1,22 @@
-<tr {{bindAttr class="isTrashed"}}>
-	<td class="result-controls">
-		{{#if isTrashable}}
-			<span class="icon-trash" {{action "toggleTrashed"}}></span>
-			<span class="icon-random" {{action "setScramble" scramble}} ></span>
-		{{/if}}
-	</td>
+<td class="result-controls">
+	{{#if isTrashable}}
+		<span class="icon-trash" {{action "toggleTrashed"}} title="Toggle trashed"></span>
+	{{/if}}	
+	{{#if isResolved}}
+		<span class="icon-random" {{action "setScramble" scramble}} title="Load this scramble"></span>
+	{{/if}}
+</td>
+<td>
+	{{total}} 
+	{{#if isResolved}}
+		({{timeDifference totalDifference}})
+	{{/if}}
+</td>
+{{#each d in stepDifferences}}
 	<td>
-		{{total}} 
+		{{d.time}} 
 		{{#if isResolved}}
-			({{timeDifference totalDifference}})
+			({{timeDifference d.diff}})
 		{{/if}}
 	</td>
-	{{#each d in stepDifferences}}
-		<td>
-			{{d.time}} 
-			{{#if isResolved}}
-				({{timeDifference d.diff}})
-			{{/if}}
-		</td>
-	{{/each}}
-</tr>
+{{/each}}

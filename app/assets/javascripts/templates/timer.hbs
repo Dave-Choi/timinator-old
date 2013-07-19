@@ -1,41 +1,41 @@
 <div class="results">
-    <h2>{{method.name}}</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th> {{! Extra space for controls column }}</th>
-          <th>Total ({{log.totalMeanAverage}})</th>
-          {{#each stepHeaders}}
-            <th>{{this}}</th>
-          {{/each}}
-        </tr>
-      </thead>
-      {{render "solveResult" solveResult}}
-      {{#each log.results}}
-        {{render "solveResult" this}}
-      {{/each}}
-    </table>
-    
-    <div id="chart">
-      <svg></svg>
-    </div>
-  </div>
-  
-  <div class="methodSelect">
-    Methods: <a href="#" {{action "setMethod" Timinator.noBreakdownMethod}}>No Breakdown</a>
-    <a href="#" {{action "setMethod" Timinator.cfopMethod}}>CFOP</a>
-    <a href="#" {{action "setMethod" Timinator.rouxMethod}}>Roux</a>
-  </div>
-  
-  <div class="timeDisplay">
-    <p>Scramble: {{solveResult.scramble}}</p>
-    {{#if isMultiStep}}
-      <h3>{{stepName}}: {{time}}</h3>
-    {{/if}}
-    <h2>Total: {{totalTime}}</h2>
-  </div>
-  
-  <div class="controls">  
-    <button type="button" {{action "step"}}>step</button>
-    <button type="button" {{action "stop"}}>stop</button>
-  </div>
+	<h2>{{method.name}}</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th> {{! Extra space for controls column }}</th>
+				<th>Total ({{log.totalMeanAverage}})</th>
+				{{#each stepHeaders}}
+					<th>{{this}}</th>
+				{{/each}}
+			</tr>
+		</thead>
+		{{render "solveResult" solveResult}}
+		{{#each log.results}}
+			{{render "solveResult" this}}
+		{{/each}}
+	</table>
+	
+	<div id="chart">
+		<svg></svg>
+	</div>
+</div>
+
+<div class="methodSelect">
+	Methods: <a href="#" {{action "setMethod" Timinator.noBreakdownMethod}}>No Breakdown</a>
+	<a href="#" {{action "setMethod" Timinator.cfopMethod}}>CFOP</a>
+	<a href="#" {{action "setMethod" Timinator.rouxMethod}}>Roux</a>
+</div>
+
+<div class="timeDisplay">
+	<p>Scramble: {{solveResult.scramble}}</p>
+	{{#if isMultiStep}}
+		<h3>{{stepName}}: {{time}}</h3>
+	{{/if}}
+	<h2>Total: {{totalTime}}</h2>
+</div>
+
+<div class="controls">  
+	<button type="button" {{action "step"}}>step</button>
+	<button type="button" {{action "stop"}}>stop</button>
+</div>
