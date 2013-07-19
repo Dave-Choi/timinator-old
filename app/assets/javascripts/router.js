@@ -9,6 +9,12 @@ Timinator.ApplicationRoute = Ember.Route.extend({
 	}
 });
 
+Timinator.IndexRoute = Ember.Route.extend({
+	redirect: function(){
+		this.transitionTo("timer");
+	}
+});
+
 Timinator.TimerRoute = Ember.Route.extend({
 	// Keybinding just doesn't work well on a view level unless it's an input field
 	enter: function(){
