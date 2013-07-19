@@ -24,6 +24,7 @@
 
 // for more details see: http://emberjs.com/guides/application/
 Timinator = Ember.Application.create({
+	LOG_TRANSITIONS: true,
 	routes: function(){
         return this.Router.router.recognizer.names;
     }
