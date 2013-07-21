@@ -22,6 +22,10 @@
 //= require_self
 //= require timinator
 
+// TODO: Remove this ASAP
+window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame;
+window.cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
 // for more details see: http://emberjs.com/guides/application/
 Timinator = Ember.Application.create({
 	LOG_TRANSITIONS: true,
