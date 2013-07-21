@@ -3,16 +3,17 @@
 }
 
 .results{
-  border: solid black 1px;
-  float: right;
-  padding: 10px;
+
 }
 
 #chart svg{
   background-color: #f0f0f0;
   height: 400px;
-  width: 600px;
-  float: right;
+  //width: 600px;
+}
+
+th.active{
+  color: #0088cc;
 }
 
 td, th{

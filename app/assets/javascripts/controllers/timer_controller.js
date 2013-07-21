@@ -15,8 +15,8 @@ Timinator.TimerController = Ember.Controller.extend({
 
 		var method = this.get("method");
 		if(!method){
-			method = Timinator.noBreakdownMethod;
-			//method = Timinator.rouxMethod;
+			//method = Timinator.noBreakdownMethod;
+			method = Timinator.rouxMethod;
 		}
 		this.set("method", method);
 
@@ -32,8 +32,26 @@ Timinator.TimerController = Ember.Controller.extend({
 		this.set("log", log);
 	},
 
+	steps: function(){
+		var stepNames = this.get("method.stepNames");
+		var stepIndex = this.get("stepIndex");
+		var log = this.get("log");
+
+		return stepNames.map(function(item, index, enumerable){
+			return {
+				name: item,
+				active: index == stepIndex,
+				average: log.meanAverage(index)
+			};
+		});
+	}.property("method.stepNames.@each", "stepIndex", "log.results.@each.time", "log.results.@each.isTrashed"),
+
 	stepName: function(){
-		return this.get("method.stepNames")[this.get("stepIndex")];
+		var index = this.get("stepIndex");
+		if(index == -1){
+			index = 0;
+		}
+		return this.get("method.stepNames")[index];
 	}.property("method", "stepIndex"),
 
 	stepHeaders: function(){
