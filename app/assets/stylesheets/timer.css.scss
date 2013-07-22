@@ -50,3 +50,7 @@ tr:hover td{
     color: green;
   }
 }
+
+div[class="tooltip-inner"] {
+    max-width: none;
+}
