@@ -18,14 +18,16 @@ Timinator.SolveResultController = Ember.ObjectController.extend({
 		return Timinator.Math.thousandthPrecision(this.get("total") - this.get("controllers.timer.log.totalMeanAverage"));
 	}.property("controllers.timer.log.totalMeanAverage"),
 
-	stepDifferences: function(){
+	steps: function(){
 		var log = this.get("controllers.timer.log");
 		var times = this.get("times");
+		var totalTime = this.get("total");
 		return times.map(function(item, index, enumerable){
 			return {
 				time: item,
-				diff: Timinator.Math.thousandthPrecision(item - log.get("meanAverages")[index])
+				differenceFromAverage: Timinator.Math.thousandthPrecision(item - log.get("meanAverages")[index]),
+				percentOfTotal: item / totalTime || 0
 			};
-		})
+		});
 	}.property("times.@each", "controllers.timer.log.meanAverages.@each")
 });

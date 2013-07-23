@@ -38,10 +38,12 @@ Timinator.TimerController = Ember.Controller.extend({
 		var log = this.get("log");
 
 		return stepNames.map(function(item, index, enumerable){
+			var average = log.meanAverage(index);
 			return {
 				name: item,
 				active: index == stepIndex,
-				average: log.meanAverage(index)
+				average: average,
+				percentOfTotal: average / log.get("totalMeanAverage") || 0
 			};
 		});
 	}.property("method.stepNames.@each", "stepIndex", "log.results.@each.time", "log.results.@each.isTrashed"),
@@ -53,19 +55,6 @@ Timinator.TimerController = Ember.Controller.extend({
 		}
 		return this.get("method.stepNames")[index];
 	}.property("method", "stepIndex"),
-
-	stepHeaders: function(){
-		var log = this.get("log");
-		var stepNames = this.get("method.stepNames");
-		if(log.get("results.length")){
-			var stepNamesWithAverage = this.get("method.stepNames").map(function(item, index, enumerable){
-				return item + " (" + log.meanAverage(index) + ")";
-			});
-			return stepNamesWithAverage;
-		}
-		return stepNames;
-
-	}.property("method.stepNames", "log.results.@each", "log.results.@each.isTrashed"),
 
 	isMultiStep: function(){
 		return this.get("method.numSteps") > 1;

@@ -31,7 +31,7 @@
 				<th>Total ({{log.totalMeanAverage}})</th>
 				{{#if isMultiStep}}
 					{{#each steps}}
-						<th {{bindAttr class="active"}}>{{name}} ({{average}})</th>
+						<th {{bindAttr class="active"}}>{{name}} ({{average}} - {{percentage percentOfTotal}})</th>
 					{{/each}}
 				{{/if}}
 			</tr>
