@@ -37,7 +37,7 @@ Timinator.rouxMethod = Timinator.Method.create({
 	stepNames: [
 		"First block",
 		"Second block",
-		"Corners",
+		"CMLL",
 		"Last Six Edges"
 	]
 });
