@@ -66,6 +66,9 @@ Timinator.TimerController = Ember.Controller.extend({
 	}.property("solveResult.total", "time"),
 
 	setMethod: function(method){
+		if(this.get("isTiming")){
+			this.stop();
+		}
 		this.set("method", method);
 		this.set("log", Timinator.SessionLog.create({
 			method: method
