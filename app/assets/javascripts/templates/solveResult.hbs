@@ -12,11 +12,13 @@
 		({{timeDifference totalDifference}})
 	{{/if}}
 </td>
-{{#each d in steps}}
-	<td>
-		{{d.time}} 
-		{{#if isResolved}}
-			({{timeDifference d.differenceFromAverage}} - {{percentage d.percentOfTotal}})
-		{{/if}}
-	</td>
-{{/each}}
+{{#if controllers.timer.isMultiStep}}
+	{{#each d in steps}}
+		<td>
+			{{d.time}} 
+			{{#if isResolved}}
+				({{timeDifference d.differenceFromAverage}} - {{percentage d.percentOfTotal}})
+			{{/if}}
+		</td>
+	{{/each}}
+{{/if}}
