@@ -1,0 +1,1 @@
+Timinator.PuzzlesController = Ember.ArrayController.extend();
