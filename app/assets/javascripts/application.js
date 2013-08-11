@@ -34,4 +34,10 @@ Timinator = Ember.Application.create({
     }
 });
 
+Ember.ArrayController.reopen({
+	reverse: function(){
+		return this.get('model').toArray().reverse();
+    }.property('model.@each')
+});
+
 //= require_tree .
