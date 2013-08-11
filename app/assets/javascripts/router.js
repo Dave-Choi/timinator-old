@@ -1,17 +1,17 @@
 Timinator.Router.map(function(){
-	this.route("timer");
-	this.resource("methods");
+	this.resource("puzzle", { path: ":puzzle_id" }, function(){
+		this.resource("method", { path: ":method_id" }, function(){
+			this.resource("timer");
+			this.route("stats");
+			//this.resource("steps");
+		});
+	});
 });
 
 Timinator.ApplicationRoute = Ember.Route.extend({
-	redirect: function(){
-		this.transitionTo("timer");
-	}
-});
-
-Timinator.IndexRoute = Ember.Route.extend({
-	redirect: function(){
-		this.transitionTo("timer");
+	setupController: function(){
+		this.controllerFor("puzzles").set("model", Timinator.Puzzle.find());
+		this.controllerFor("methods").set("model", Timinator.Method.find());
 	}
 });
 
