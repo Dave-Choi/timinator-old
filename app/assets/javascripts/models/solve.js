@@ -12,6 +12,6 @@ Timinator.Solve = DS.Model.extend({
 		stepResults.forEach(function(item, index, enumerable){
 			total += item.get("time");
 		});
-		return total;
-	}.property("stepResults.@each.time")
-});
+		return Timinator.Math.thousandthPrecision(total);
+	}.property("stepResults.@each.time"),
+
