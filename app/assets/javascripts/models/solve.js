@@ -1,3 +1,14 @@
+/*
+	The Solve model provides some aggregate functionality over 
+	StepResuls, grouping them with an associated Method and scramble.
+
+	Only completed Solves should be used for overall solve time tracking,
+	but StepResults can be used without an associated Solve for isolated
+	step drills, which can traverse Methods (e.g. The Cross is used
+	in CFOP and some beginner methods), and should therefore be tracked 
+	independently of Methods.
+*/
+
 Timinator.Solve = DS.Model.extend({
 	datetime: DS.attr("date"),
 	scramble: DS.attr("string"),
