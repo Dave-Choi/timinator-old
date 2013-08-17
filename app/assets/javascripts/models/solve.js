@@ -26,3 +26,34 @@ Timinator.Solve = DS.Model.extend({
 		return Timinator.Math.thousandthPrecision(total);
 	}.property("stepResults.@each.time"),
 
+	isComplete: function(){
+		/*
+			A Solve is considered complete if there exists a StepResult
+			for each Step in the Solve's Method.
+		*/
+		var stepResults = this.get("stepResults");
+		var steps = this.get("method.steps");
+
+		// Check for count mismatch first, because the rest is really inefficient.
+		if(stepResults.get("length") != steps.get("length")){
+			return false;
+		}
+
+		// Count checks out, so iterate to check for one to one correspondence
+
+		// These are sorted and the same length, so they can just be iterated through directly.
+		var stepIDs = steps.mapProperty("id").sort();
+		var stepResultStepIDs = stepResults.mapProperty("step.id").sort();
+		var i, len = stepIDs.get("length");
+
+		for(i=0; i<len; i++){
+			var stepID = stepIDs.objectAt(i);
+			var stepResultStepID = stepResultStepIDs.objectAt(i);
+			if(stepID != stepResultStepID){
+				return false;
+			}
+		}
+
+		return true;
+	}.property("stepResults.@each")
+});
