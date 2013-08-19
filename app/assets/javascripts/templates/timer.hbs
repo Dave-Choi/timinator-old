@@ -1,19 +1,12 @@
-<div class="methodSelect">
-	Methods: <a href="#" {{action "setMethod" Timinator.noBreakdownMethod}}>No Breakdown</a>
-	<a href="#" {{action "setMethod" Timinator.cfopMethod}}>CFOP</a>
-	<a href="#" {{action "setMethod" Timinator.rouxMethod}}>Roux</a>
-</div>
-
 <div class="row-fluid">
-	<h4>Scramble: {{solveResult.scramble}}</h4>
-
+	<h4>Scramble: {{solve.scramble}}</h4>
 	<div>
 		<div class="timeDisplay">
 			<h2>{{method.name}}</h2>
 			{{#if isMultiStep}}
-				<h3>{{stepName}}: {{time}}</h3>
+				<h3>{{solve.currentStep.name}}: {{time time}}</h3>		
 			{{/if}}
-			<h2>Total: {{totalTime}}</h2>
+			<h2>Total: {{time totalTime}}</h2>
 		</div>
 
 		<div class="controls">  
@@ -28,17 +21,17 @@
 		<thead>
 			<tr>
 				<th> {{! Extra space for controls column }}</th>
-				<th>Total ({{log.totalMeanAverage}})</th>
+				<th>Total ({{solves.totalMeanAverage}})</th>
 				{{#if isMultiStep}}
-					{{#each steps}}
-						<th {{bindAttr class="active"}}>{{name}} ({{average}} - {{percentage percentOfTotal}})</th>
+					{{#each solves.stepStats}}
+						<th {{bindAttr class="active"}}>{{name}} ({{time average}} - {{percentage percentOfTotal}})</th>
 					{{/each}}
 				{{/if}}
 			</tr>
 		</thead>
-		{{render "solveResult" solveResult}}
-		{{#each log.results}}
-			{{render "solveResult" this}}
+		{{render "solve" solve}}
+		{{#each solves.reverse}}
+			{{render "solve" this}}
 		{{/each}}
 	</table>
 </div>
