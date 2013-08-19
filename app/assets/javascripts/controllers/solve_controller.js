@@ -4,7 +4,13 @@
 */
 
 Timinator.SolveController = Ember.ObjectController.extend(Timinator.Trashable, {
-	needs: ["method"],
+	needs: ["method", "solves"], /*
+		Setting bindings from this controller breaks.  
+
+		I suspect it's got something to do with their generation 
+		from the #each helper in Handlebars, rather than being 
+		set up via the router.
+	*/
 	currentStepIndex: 0,
 
 	currentStep: function(){
@@ -33,5 +39,12 @@ Timinator.SolveController = Ember.ObjectController.extend(Timinator.Trashable, {
 			time: time
 		});
 		this.get("store").commit();
-	}
+	},
+
+	totalDifference: function(){
+		var solvesAverage = this.get("controllers.solves.totalMeanAverage");
+		var totalTime = this.get("totalTime");
+
+		return totalTime - solvesAverage;
+	}.property("totalTime", "controllers.solves.totalMeanAverage")
 });
