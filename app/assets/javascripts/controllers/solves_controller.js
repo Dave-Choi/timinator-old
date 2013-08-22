@@ -3,10 +3,17 @@ Timinator.SolvesController = Ember.ArrayController.extend({
 	methodBinding: "controllers.method",
 
 	totalMeanAverage: function(){
+		var numComplete = 0;
 		var total = this.reduce(function(previousValue, item, index, enumerable){
-			return previousValue + item.get("totalTime");
+			var isComplete = item.get("isComplete");
+			if(item.get("isComplete")){
+				numComplete++;
+				return previousValue + item.get("totalTime");
+			}
+			return previousValue;
 		}, 0);
-		return Timinator.Math.thousandthPrecision(total / this.get("length")) || 0;
+		
+		return Timinator.Math.thousandthPrecision(total / numComplete) || 0;
 	}.property("model.@each.totalTime"),
 
 	stepAverage: function(step){
