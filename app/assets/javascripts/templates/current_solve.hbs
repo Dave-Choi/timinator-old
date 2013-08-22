@@ -1,0 +1,12 @@
+<tr>
+	<td class="result-controls">
+	</td>
+
+	<td>
+		{{time totalTime}}
+	</td>
+
+	{{#each stepResults}}
+		{{render "step_result" this}}
+	{{/each}}
+</tr>
