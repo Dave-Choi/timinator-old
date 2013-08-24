@@ -1,7 +1,5 @@
 Timinator.StepResultController = Ember.ObjectController.extend({
 	needs: ["solves"],
-	// solvesBinding: "controllers.solves",
-	// solveBinding: "controllers.solve",
 
 	differenceFromAverage: function(){
 		var stepAverage = this.get("controllers.solves").stepAverage(this.get("step"));
