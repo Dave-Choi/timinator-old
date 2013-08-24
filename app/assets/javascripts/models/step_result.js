@@ -1,4 +1,4 @@
-Timinator.StepResult = DS.Model.extend({
+Timinator.StepResult = DS.Model.extend(Timinator.Trashable, {
 	time: DS.attr("number"),
 
 	solve: DS.belongsTo("Timinator.Solve"),

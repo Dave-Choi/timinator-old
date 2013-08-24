@@ -3,7 +3,7 @@
 		- Tracks the current step
 */
 
-Timinator.SolveController = Ember.ObjectController.extend(Timinator.Trashable, {
+Timinator.SolveController = Ember.ObjectController.extend({
 	needs: ["method", "solves"], /*
 		Setting bindings from this controller breaks.  
 
@@ -12,6 +12,11 @@ Timinator.SolveController = Ember.ObjectController.extend(Timinator.Trashable, {
 		set up via the router.
 	*/
 	currentStepIndex: 0,
+
+	toggleTrashed: function(){
+		// This doesn't get automatically forwarded to the model, and I'm not sure why.
+		this.get("model").toggleTrashed();
+	},
 
 	currentStep: function(){
 		var index = this.get("currentStepIndex");

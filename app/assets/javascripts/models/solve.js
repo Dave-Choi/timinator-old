@@ -9,7 +9,7 @@
 	independently of Methods.
 */
 
-Timinator.Solve = DS.Model.extend({
+Timinator.Solve = DS.Model.extend(Timinator.Trashable, {
 	datetime: DS.attr("date"),
 	scramble: DS.attr("string"),
 
@@ -55,5 +55,13 @@ Timinator.Solve = DS.Model.extend({
 		}
 
 		return true;
-	}.property("stepResults.@each")
+	}.property("stepResults.@each"),
+
+	trashedChanged: function(){
+		// Propagates trashed status to child StepResults
+		var isTrashed = this.get("isTrashed");
+		var stepResults = this.get("stepResults");
+
+		stepResults.setEach("isTrashed", isTrashed);
+	}.observes("isTrashed")
 });
