@@ -44,5 +44,10 @@ Timinator.Step.FIXTURES = [
 		id: 8,
 		name: "L6E",
 		description: "Solve last layer and DF and DB edges."
+	},
+	{
+		id: 9,
+		name: "Full Solve",
+		description: "Freestyle start to finish."
 	}
 ];

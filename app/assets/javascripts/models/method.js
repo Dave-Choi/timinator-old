@@ -9,7 +9,9 @@ Timinator.Method.FIXTURES = [
 		id: 1,
 		puzzle: 1,
 		name: "No Breakdown",
-		steps: []
+		steps: [
+			9 // Full Solve
+		]
 	},
 	{
 		id: 2,
