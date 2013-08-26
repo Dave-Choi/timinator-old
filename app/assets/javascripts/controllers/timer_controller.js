@@ -59,10 +59,6 @@ Timinator.TimerController = Ember.Controller.extend({
 		return this.get("method.stepNames")[index];
 	}.property("method", "stepIndex"),
 
-	isMultiStep: function(){
-		return this.get("method.steps.length") > 1;
-	}.property("method.steps.length"),
-
 	totalTime: function(){
 		var total =  this.get("solve.totalTime") + this.get("time");
 		return Timinator.Math.thousandthPrecision(total);

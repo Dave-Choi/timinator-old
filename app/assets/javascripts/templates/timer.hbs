@@ -3,7 +3,7 @@
 	<h4>Scramble: {{solve.scramble}}</h4>
 	<div>
 		<div class="timeDisplay">
-			{{#if isMultiStep}}
+			{{#if method.isMultiStep}}
 				<h3>{{solve.currentStep.name}}: {{time time}}</h3>		
 			{{/if}}
 			<h2>Total: {{time totalTime}}</h2>
@@ -22,7 +22,7 @@
 			<tr>
 				<th> {{! Extra space for controls column }}</th>
 				<th>Total ({{solves.totalMeanAverage}})</th>
-				{{#if isMultiStep}}
+				{{#if method.isMultiStep}}
 					{{#each solves.stepStats}}
 						<th {{bindAttr class="active"}}>{{name}} ({{time average}} - {{percentage percentOfTotal}})</th>
 					{{/each}}

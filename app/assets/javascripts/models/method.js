@@ -1,7 +1,11 @@
 Timinator.Method = DS.Model.extend({
 	name: DS.attr("string"),
 	steps: DS.hasMany("Timinator.Step"),
-	puzzle: DS.belongsTo("Timinator.Puzzle")
+	puzzle: DS.belongsTo("Timinator.Puzzle"),
+
+	isMultiStep: function(){
+		return this.get("steps.length") > 1;
+	}.property("steps.length")
 });
 
 Timinator.Method.FIXTURES = [

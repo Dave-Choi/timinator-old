@@ -10,6 +10,8 @@
 	({{timeDifference totalDifference}})
 </td>
 
-{{#each stepResults}}
-	{{render "step_result" this}}
-{{/each}}
+{{#if method.isMultiStep}}
+	{{#each stepResults}}
+		{{render "step_result" this}}
+	{{/each}}
+{{/if}}
