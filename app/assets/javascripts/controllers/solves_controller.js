@@ -19,6 +19,13 @@ Timinator.SolvesController = Ember.ArrayController.extend({
 
 	stepAverage: function(step){
 		// You can specify step as a Step Object for an id.
+
+		/* 
+			Performance on this method is kind of lousy when there are more
+			than a few solves.
+
+			TODO: Test performance against a regular for loop implementation
+		*/
 		var stepID = (typeof step === "number") ? step : step.get("id");
 		var stepFilter = function(stepResult){
 			var isRightStep = (stepResult.get("step.id") == stepID);
