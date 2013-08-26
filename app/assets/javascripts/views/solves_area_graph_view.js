@@ -21,7 +21,8 @@ Timinator.SolvesAreaGraphView = Ember.View.extend({
 			.clipEdge(true);
 
 			chart.xAxis
-			.showMaxMin(false);
+			.showMaxMin(false)
+			.tickFormat(d3.format("d"));
 
 			chart.yAxis
 			.tickFormat(d3.format(',.3f')); // TODO: Convert this to a better time format
