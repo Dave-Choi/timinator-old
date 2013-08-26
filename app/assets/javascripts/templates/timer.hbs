@@ -1,8 +1,8 @@
 <div class="row-fluid">
+	<h2>{{puzzle.name}}: {{method.name}}</h2>
 	<h4>Scramble: {{solve.scramble}}</h4>
 	<div>
 		<div class="timeDisplay">
-			<h2>{{method.name}}</h2>
 			{{#if isMultiStep}}
 				<h3>{{solve.currentStep.name}}: {{time time}}</h3>		
 			{{/if}}
