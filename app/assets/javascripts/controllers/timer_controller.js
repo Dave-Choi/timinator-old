@@ -51,22 +51,6 @@ Timinator.TimerController = Ember.Controller.extend({
 		return stepResult;
 	},
 
-	// steps: function(){
-	// 	var stepNames = this.get("method.stepNames");
-	// 	var stepIndex = this.get("stepIndex");
-	// 	var log = this.get("log");
-
-	// 	return stepNames.map(function(item, index, enumerable){
-	// 		var average = log.meanAverage(index);
-	// 		return {
-	// 			name: item,
-	// 			active: index == stepIndex,
-	// 			average: average,
-	// 			percentOfTotal: average / log.get("totalMeanAverage") || 0
-	// 		};
-	// 	});
-	// }.property("method.stepNames.@each", "stepIndex", "log.results.@each.time", "log.results.@each.isTrashed"),
-
 	stepName: function(){
 		var index = this.get("stepIndex");
 		if(index == -1){
@@ -130,25 +114,6 @@ Timinator.TimerController = Ember.Controller.extend({
 		else{
 			this.stop();
 		}
-
-		// var method = this.get("method");
-		// var numSteps = method.get("numSteps");
-		// var stepIndex = this.get("stepIndex");
-
-		// if(stepIndex !== -1){
-		// 	var timeInSeconds = Timinator.Math.msInSeconds(this.get("time"));
-		// 	this.get("currentSolve").pushTime(this.get("time"));
-		// }
-
-		// if(stepIndex < numSteps-1){
-		// 	this.incrementProperty("stepIndex");
-		// 	this.set("startTime", Date.now());
-		// 	this.set("isTiming", true);
-		// 	this.timestep();
-		// }
-		// else{
-		// 	this.stop();
-		// }
 	},
 
 	stop: function(){
@@ -157,22 +122,7 @@ Timinator.TimerController = Ember.Controller.extend({
 		this.set("isTiming", false);
 		cancelAnimationFrame(this.get("animationHandle"));
 
-		/*
-		if(this.get("stepIndex") > -1){
-			var oldResult = this.get("currentSolve");
-			oldResult.set("isTrashable", true);
-			oldResult.set("isResolved", true);
-			log.addResult(oldResult);
-
-			var newResult = Timinator.currentSolve.create({
-				isTrashable: false,
-				method: this.get("method")
-			});
-			this.set("currentSolve", newResult);
-		}
-		*/
 		this.logSolve();
-
 
 		this.set("solve.currentStepIndex", 0);
 		this.set("time", 0);
