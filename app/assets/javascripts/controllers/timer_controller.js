@@ -12,6 +12,11 @@ Timinator.TimerController = Ember.Controller.extend({
 
 	stepIndex: -1,
 
+	methodChanged: function(){
+		this.get("solves").clear();
+		this.get("solve").set("model", this.newSolve());
+	}.observes("method.model"),
+
 	init: function(){
 		this._super();
 
