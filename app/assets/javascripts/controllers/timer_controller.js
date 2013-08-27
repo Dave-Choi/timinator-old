@@ -10,8 +10,6 @@ Timinator.TimerController = Ember.Controller.extend({
 	isTiming: false,
 	animationHandle: null,
 
-	stepIndex: -1,
-
 	methodChanged: function(){
 		this.get("solves").clear();
 		this.get("solve").set("model", this.newSolve());
@@ -55,41 +53,14 @@ Timinator.TimerController = Ember.Controller.extend({
 		return stepResult;
 	},
 
-	stepName: function(){
-		var index = this.get("stepIndex");
-		if(index == -1){
-			index = 0;
-		}
-		return this.get("method.stepNames")[index];
-	}.property("method", "stepIndex"),
-
 	totalTime: function(){
 		var total =  this.get("solve.totalTime") + this.get("time");
 		return Timinator.Math.thousandthPrecision(total);
 	}.property("solve.totalTime", "time"),
 
-	setMethod: function(method){
-		if(this.get("isTiming")){
-			this.stop();
-		}
-		this.set("method", method);
-		this.set("log", Timinator.SessionLog.create({
-			method: method
-		}));
-		$("#chart").html("<svg></svg>");
-	},
-
 	setScramble: function(scramble){
 		this.get("solve").set("scramble", scramble);
 	},
-
-	plotGraph: function(){
-		Timinator.SessionLogSerializer.graph("#chart svg", Timinator.SessionLogSerializer.serialize(this.get("log")));
-	},
-
-	replotNeeded: function(){
-		this.plotGraph();
-	}.observes("log.results.@each", "log.results.@each.isTrashed"),
 
 	resetTime: function(){
 		this.set("startTime", Date.now());
