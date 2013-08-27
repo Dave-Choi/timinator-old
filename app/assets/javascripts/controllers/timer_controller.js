@@ -30,7 +30,6 @@ Timinator.TimerController = Ember.Controller.extend({
 			scramble: Timinator.ScrambleGenerator.generate(puzzle)
 		});
 
-		solve.get("store").commit();
 		return solve;
 	},
 
