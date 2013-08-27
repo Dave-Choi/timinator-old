@@ -28,6 +28,7 @@ Timinator.TimerController = Ember.Controller.extend({
 		var puzzle = this.get("puzzle.model");
 		var method = this.get("method.model");
 		var solve = Timinator.Solve.createRecord({
+			datetime: Date.now(),
 			method: method,
 			puzzle: puzzle,
 			scramble: Timinator.ScrambleGenerator.generate(puzzle)
@@ -88,8 +89,6 @@ Timinator.TimerController = Ember.Controller.extend({
 	},
 
 	stop: function(){
-		var log = this.get("log");
-
 		this.set("isTiming", false);
 		cancelAnimationFrame(this.get("animationHandle"));
 
