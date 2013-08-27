@@ -10,6 +10,8 @@ Timinator.SolvesAreaGraphView = Ember.View.extend({
 	},
 
 	setupGraph: function(){
+		this.$().empty();
+
 		var data = this.get("stepResultsData") || [];
 		var container = this.$()[0];
 		var view = this;
