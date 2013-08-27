@@ -8,6 +8,8 @@ Timinator.TimerController = Ember.Controller.extend({
 	time: 0,
 	startTime: 0,
 	isTiming: false,
+	isNotTiming: function(){ return !this.get("isTiming"); }.property("isTiming"),
+
 	animationHandle: null,
 
 	methodChanged: function(){
@@ -89,6 +91,10 @@ Timinator.TimerController = Ember.Controller.extend({
 	},
 
 	stop: function(){
+		if(!this.get("isTiming")){
+			return;
+		}
+
 		this.set("isTiming", false);
 		cancelAnimationFrame(this.get("animationHandle"));
 
