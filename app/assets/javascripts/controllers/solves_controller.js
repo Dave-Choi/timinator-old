@@ -7,6 +7,7 @@ Timinator.SolvesController = Ember.ArrayController.extend({
 		var total = this.reduce(function(previousValue, item, index, enumerable){
 			var isComplete = item.get("isComplete");
 			var isTrashed = item.get("isTrashed");
+
 			if(item.get("isComplete") && !isTrashed){
 				numComplete++;
 				return previousValue + item.get("totalTime");
@@ -15,7 +16,11 @@ Timinator.SolvesController = Ember.ArrayController.extend({
 		}, 0);
 
 		return Timinator.Math.thousandthPrecision(total / numComplete) || 0;
-	}.property("model.@each.totalTime", "model.@each.isComplete", "model.@each.isTrashed"),
+	}.property(
+		"model.@each.totalTime",
+		"model.@each.isComplete",
+		"model.@each.isTrashed"
+	),
 
 	stepAverage: function(step){
 		// You can specify step as a Step Object for an id.
