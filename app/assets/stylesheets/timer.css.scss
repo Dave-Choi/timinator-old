@@ -3,7 +3,9 @@
 }
 
 .results{
-
+  table{
+    table-layout: fixed;
+  }
 }
 
 #chart svg{

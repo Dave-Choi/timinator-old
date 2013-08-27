@@ -8,6 +8,10 @@ group :development do
 	gem 'sqlite3'
 end
 
+group :development, :test do  
+    gem "jasminerice", :git => 'https://github.com/bradphelan/jasminerice.git'  
+end  
+
 group :production do
 	gem 'pg'
 end

@@ -1,4 +1,9 @@
 Timinator.ScrambleGenerator = Ember.Object.create({
+	generate: function(puzzle){
+		var slug = puzzle.get("slug");
+		return this["generate" + slug]();
+	},
+
 	randomElement: function(a){
 		return a[Math.floor(Math.random() * a.length)];
 	},

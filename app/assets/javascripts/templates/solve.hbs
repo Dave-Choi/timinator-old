@@ -1,0 +1,17 @@
+<td class="result-controls">
+	{{#if isTrashable}}
+		<span class="icon-trash" {{action "toggleTrashed"}} title="Toggle trashed"></span>
+	{{/if}}	
+	<span class="icon-random" {{action "setScramble" scramble}} title="Load this scramble"></span>
+</td>
+
+<td>
+	{{time totalTime}} 
+	({{timeDifference totalDifference}})
+</td>
+
+{{#if method.isMultiStep}}
+	{{#each stepResults}}
+		{{render "step_result" this}}
+	{{/each}}
+{{/if}}

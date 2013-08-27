@@ -1,7 +1,9 @@
 Timinator.TimerController = Ember.Controller.extend({
-	log: null,
-	method: null,
-	solveResult: null,
+	needs: ["method", "puzzle", "solve", "solves"],
+	methodBinding: "controllers.method",
+	puzzleBinding: "controllers.puzzle",
+	solveBinding: "controllers.solve",
+	solvesBinding: "controllers.solves",
 
 	time: 0,
 	startTime: 0,
@@ -10,43 +12,48 @@ Timinator.TimerController = Ember.Controller.extend({
 
 	stepIndex: -1,
 
+	methodChanged: function(){
+		this.get("solves").clear();
+		this.get("solve").set("model", this.newSolve());
+	}.observes("method.model"),
+
 	init: function(){
 		this._super();
 
-		var method = this.get("method");
-		if(!method){
-			//method = Timinator.noBreakdownMethod;
-			method = Timinator.rouxMethod;
-		}
-		this.set("method", method);
+		var method = this.get("method.model");
+		var puzzle = this.get("puzzle.model");
 
-		var solveResult = Timinator.SolveResult.create({
-			method: method,
-			isTrashable: false
-		});
-		this.set("solveResult", solveResult);
-
-		var log = Timinator.SessionLog.create({
-			method: method
-		});
-		this.set("log", log);
+		this.get("solve").set("model", this.newSolve());
 	},
 
-	steps: function(){
-		var stepNames = this.get("method.stepNames");
-		var stepIndex = this.get("stepIndex");
-		var log = this.get("log");
-
-		return stepNames.map(function(item, index, enumerable){
-			var average = log.meanAverage(index);
-			return {
-				name: item,
-				active: index == stepIndex,
-				average: average,
-				percentOfTotal: average / log.get("totalMeanAverage") || 0
-			};
+	newSolve: function(){
+		var puzzle = this.get("puzzle.model");
+		var method = this.get("method.model");
+		var solve = Timinator.Solve.createRecord({
+			method: method,
+			puzzle: puzzle,
+			scramble: Timinator.ScrambleGenerator.generate(puzzle)
 		});
-	}.property("method.stepNames.@each", "stepIndex", "log.results.@each.time", "log.results.@each.isTrashed"),
+
+		return solve;
+	},
+
+	logSolve: function(){
+		var oldSolve = this.get("solve.model");
+		this.get("solves").addObject(oldSolve);
+
+		var newSolve = this.newSolve();
+		this.get("solve").set("model", newSolve);
+
+		this.get("store").commit();
+	},
+
+	newStepResult: function(step){
+		var stepResult = Timinator.StepResult.createRecord({
+
+		});
+		return stepResult;
+	},
 
 	stepName: function(){
 		var index = this.get("stepIndex");
@@ -56,14 +63,10 @@ Timinator.TimerController = Ember.Controller.extend({
 		return this.get("method.stepNames")[index];
 	}.property("method", "stepIndex"),
 
-	isMultiStep: function(){
-		return this.get("method.numSteps") > 1;
-	}.property("method.numSteps"),
-
 	totalTime: function(){
-		var total =  this.get("solveResult.total") + this.get("time");
-		return Math.floor(total * 1000) / 1000;
-	}.property("solveResult.total", "time"),
+		var total =  this.get("solve.totalTime") + this.get("time");
+		return Timinator.Math.thousandthPrecision(total);
+	}.property("solve.totalTime", "time"),
 
 	setMethod: function(method){
 		if(this.get("isTiming")){
@@ -77,7 +80,7 @@ Timinator.TimerController = Ember.Controller.extend({
 	},
 
 	setScramble: function(scramble){
-		this.solveResult.set("scramble", scramble);
+		this.get("solve").set("scramble", scramble);
 	},
 
 	plotGraph: function(){
@@ -88,21 +91,25 @@ Timinator.TimerController = Ember.Controller.extend({
 		this.plotGraph();
 	}.observes("log.results.@each", "log.results.@each.isTrashed"),
 
+	resetTime: function(){
+		this.set("startTime", Date.now());
+	},
+
 	step: function(){
-		var method = this.get("method");
-		var numSteps = method.get("numSteps");
-		var stepIndex = this.get("stepIndex");
+		/*
+			Start timing, or advance the state of the solve.
 
-		if(stepIndex !== -1){
-			var timeInSeconds = Timinator.Math.msInSeconds(this.get("time"));
-			this.get("solveResult").pushTime(this.get("time"));
-		}
+			If the solve is done, stop timing.
+		*/
+		var solve = this.get("solve");
 
-		if(stepIndex < numSteps-1){
-			this.incrementProperty("stepIndex");
-			this.set("startTime", Date.now());
+		if(!this.get("isTiming")){
 			this.set("isTiming", true);
+			this.resetTime();
 			this.timestep();
+		}
+		else if(solve.advance(this.get("time"))){
+			this.resetTime();
 		}
 		else{
 			this.stop();
@@ -115,20 +122,9 @@ Timinator.TimerController = Ember.Controller.extend({
 		this.set("isTiming", false);
 		cancelAnimationFrame(this.get("animationHandle"));
 
-		if(this.get("stepIndex") > -1){
-			var oldResult = this.get("solveResult");
-			oldResult.set("isTrashable", true);
-			oldResult.set("isResolved", true);
-			log.addResult(oldResult);
+		this.logSolve();
 
-			var newResult = Timinator.SolveResult.create({
-				isTrashable: false,
-				method: this.get("method")
-			});
-			this.set("solveResult", newResult);
-		}
-
-		this.set("stepIndex", -1);
+		this.set("solve.currentStepIndex", 0);
 		this.set("time", 0);
 	},
 
