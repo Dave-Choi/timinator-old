@@ -40,6 +40,7 @@ GEM
       ember-source
       execjs
       handlebars-source
+    bcrypt-ruby (3.1.2)
     bootstrap-sass (2.3.2.0)
       sass (~> 3.2)
     builder (3.1.4)
@@ -50,6 +51,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    devise (3.0.3)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      warden (~> 1.2.3)
     ember-data-source (0.13)
       ember-source
     ember-rails (0.13.0)
@@ -82,6 +88,7 @@ GEM
     mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
+    orm_adapter (0.4.0)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -134,13 +141,17 @@ GEM
     uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   bootstrap-sass (~> 2.3.2.0)
   coffee-rails (~> 4.0.0)
+  devise
   ember-rails
   ember-source (= 1.0.0.rc6.2)
   font-awesome-rails (= 3.2.1.2)
