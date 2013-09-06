@@ -1,0 +1,36 @@
+<form {{action register on="submit"}}>
+	<legend>Sign Up</legend>
+
+	<div class="row alert">
+		<div class="span6">
+			<h4>Your privacy</h4>
+
+			<p>User accounts will only ever be used so you can track your progress over time, and you're free to use the timer without signing up.  Anonymous solve times may be stored for general statistics.</p>
+
+			<p>We won't give your e-mail to anyone, and probably won't ever even contact you unless it's really important, like if someone finds a Ruby on Rails security exploit, and we want to give you a heads up to change your password on other sites, if you use the same password (which you shouldn't do [but probably do anyway]).</p>
+		</div>
+	</div>
+
+	<label class="control-label" for="email">e-mail</label>
+	{{input class="controls" type="text" id="email" value=email placeholder="e-mail"}}
+
+	<div {{bindAttr class=":control-group shouldWarnTooShort:warning"}}>
+		<label class="control-label" for="password">Password</label>
+		{{input type="password" id="password" value=password placeholder="password"}}
+		{{#if shouldWarnTooShort}}
+			<span class="help-inline">Password must be at least {{passwordMinLength}} characters.</span>
+		{{/if}}
+	</div>
+
+	<div {{bindAttr class=":control-group shouldWarnMismatch:warning"}}>
+		<label class="control-label" for="password-confirmation">Confirm Password</label>
+		{{input class=passwordConfirmationClass type="password" id="password-confirmation" value=passwordConfirmation placeholder="password confirmation"}}
+		{{#if shouldWarnMismatch}}
+			<span class="help-inline">Passwords don't match</span>
+		{{/if}}
+	</div>
+
+	<div class="form-actions">
+		<button type="submit" class="btn">Sign Up</button>
+	</div>
+</form>

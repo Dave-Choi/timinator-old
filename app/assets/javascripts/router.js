@@ -6,6 +6,8 @@ Timinator.Router.map(function(){
 			//this.resource("steps");
 		});
 	});
+
+	this.route("register");
 });
 
 Timinator.ApplicationRoute = Ember.Route.extend({
@@ -37,5 +39,11 @@ Timinator.TimerRoute = Ember.Route.extend({
 
 	exit: function(){
 		$(window).off("keydown.timerController keyup.timerController");
+	}
+});
+
+Timinator.RegisterRoute = Ember.Route.extend({
+	setupController: function(controller, context){
+		controller.reset();
 	}
 });

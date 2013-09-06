@@ -1,0 +1,16 @@
+<li>
+	<a href="#" {{action "toggleFormDisplay"}}>
+		{{#if shouldShowForm}}
+			Cancel
+		{{else}}
+			Log in
+		{{/if}}
+	</a>	
+</li>
+{{#if shouldShowForm}}
+	<form class="navbar-form pull-right" {{action login on="submit"}}>
+		{{input type="text" class="span2" value=email placeholder="e-mail"}}
+		{{input type="password" class="span2" value=password placeholder="password"}}
+		{{input class="btn" type="submit" value="Log In"}}
+	</form>
+{{/if}}
