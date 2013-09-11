@@ -3,13 +3,16 @@
 	Its main purpose is just to associate logged times with a
 	user account.  People can use it without data persistence on
 	their times all they want.
+
+	This controller is pretty dumb, and just handles the form itself
+	and passes its data to the CurrentUserController to do the 
+	actual lifting on.
 */
 
 Timinator.LoginController = Ember.Controller.extend({
-	needs: ["currentUser"],
+	needs: ["currentUser", "alerts"],
 	email: "",
 	password: "",
-	errorMessage: "",
 
 	shouldShowForm: false,
 
@@ -21,10 +24,13 @@ Timinator.LoginController = Ember.Controller.extend({
 	reset: function(){
 		this.setProperties({
 			email: "",
-			password: "",
-			errorMessage: ""
+			password: ""
 		});
 	},
+
+	userChanged: function(){
+		this.reset();
+	}.observes("controllers.currentUser.model"),
 
 	data: function(){
 		/* Format expected by Devise is 
@@ -32,6 +38,8 @@ Timinator.LoginController = Ember.Controller.extend({
 				"user[email]": <email>,
 				"user[password]": <password> 
 			}
+
+			TODO: This probably should be in the CurrentUserController
 		*/
 
 		return {
@@ -40,10 +48,19 @@ Timinator.LoginController = Ember.Controller.extend({
 		};
 	}.property("email", "password"),
 
+	isInputIncomplete: function(){
+		// Just make sure there's something for each field.
+		return !(this.get("email") && this.get("password"));
+	}.property("email", "password"),
+
 	login: function(){
-		var currentUser = this.get("controllers.currentUser");
-		console.log(currentUser);
-		var data = this.get("data");
-		currentUser.login(data);
+		if(this.get("isInputIncomplete")){
+			this.get("controllers.alerts").addAlert("Missing fields.");
+		}
+		else{
+			var currentUser = this.get("controllers.currentUser");
+			var data = this.get("data");
+			currentUser.login(data);
+		}
 	}
 });
