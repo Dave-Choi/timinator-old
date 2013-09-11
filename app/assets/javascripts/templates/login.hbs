@@ -11,6 +11,6 @@
 	<form class="navbar-form pull-right" {{action login on="submit"}}>
 		{{input type="text" class="span2" value=email placeholder="e-mail"}}
 		{{input type="password" class="span2" value=password placeholder="password"}}
-		{{input class="btn" type="submit" value="Log In"}}
+		{{input class="btn btn-primary" disabled=isInputIncomplete type="submit" value="Log In"}}
 	</form>
 {{/if}}
