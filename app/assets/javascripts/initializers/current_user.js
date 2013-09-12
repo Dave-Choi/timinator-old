@@ -9,8 +9,11 @@ Ember.Application.initializer({
             var object = store.load(Timinator.User, JSON.parse(attributes));
             var user = Timinator.User.find(object.id);
             var controller = container.lookup("controller:currentUser").set("content", user);
-
-            container.typeInjection("controller", "currentUser", "controller:currentUser");
         }
+        else{
+            var controller = container.lookup("controller:currentUser").set("content", null);
+        }
+
+        container.typeInjection("controller", "currentUser", "controller:currentUser");
     }
 });
