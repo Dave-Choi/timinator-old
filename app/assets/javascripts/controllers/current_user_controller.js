@@ -49,6 +49,7 @@ Timinator.CurrentUserController = Ember.ObjectController.extend({
             var user = response.user;
             alerts.addAlert("You've signed up successfully as " + user.email);
             controller.loadUser(user);
+            controller.transitionToRoute("home");
         }, function(response){
             var errorList = "";
             var errors = response.responseJSON.errors;
