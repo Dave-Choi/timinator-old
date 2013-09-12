@@ -8,6 +8,7 @@ Timinator.Router.map(function(){
 	});
 
 	this.route("register");
+	this.route("home");
 });
 
 Timinator.ApplicationRoute = Ember.Route.extend({
@@ -46,4 +47,8 @@ Timinator.RegisterRoute = Ember.Route.extend({
 	setupController: function(controller, context){
 		controller.reset();
 	}
+});
+
+Timinator.HomeRoute = Ember.Route.extend({
+	
 });
