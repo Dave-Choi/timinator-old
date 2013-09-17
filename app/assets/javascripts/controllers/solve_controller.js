@@ -13,9 +13,11 @@ Timinator.SolveController = Ember.ObjectController.extend({
 	*/
 	currentStepIndex: 0,
 
-	toggleTrashed: function(){
-		// This doesn't get automatically forwarded to the model, and I'm not sure why.
-		this.get("model").toggleTrashed();
+	actions: {
+		toggleTrashed: function(){
+			// This doesn't get automatically forwarded to the model, and I'm not sure why.
+			this.get("model").toggleTrashed();
+		},
 	},
 
 	currentStep: function(){
