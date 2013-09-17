@@ -56,7 +56,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.3)
-    ember-data-source (0.13)
+    ember-data-source (1.0.0.beta.2)
       ember-source
     ember-rails (0.13.0)
       active_model_serializers
@@ -66,7 +66,7 @@ GEM
       execjs (>= 1.2)
       handlebars-source
       railties (>= 3.1)
-    ember-source (1.0.0.rc6.2)
+    ember-source (1.0.0)
       handlebars-source (= 1.0.12)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -152,8 +152,9 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.2.0)
   coffee-rails (~> 4.0.0)
   devise
+  ember-data-source (~> 1.0.0.beta.2)
   ember-rails
-  ember-source (= 1.0.0.rc6.2)
+  ember-source (~> 1.0.0)
   font-awesome-rails (= 3.2.1.2)
   handlebars-source (~> 1.0.12)
   jasminerice!
