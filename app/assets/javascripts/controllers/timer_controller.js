@@ -61,47 +61,50 @@ Timinator.TimerController = Ember.Controller.extend({
 		return Timinator.Math.thousandthPrecision(total);
 	}.property("solve.totalTime", "time"),
 
-	setScramble: function(scramble){
-		this.get("solve").set("scramble", scramble);
-	},
 
 	resetTime: function(){
 		this.set("startTime", Date.now());
 	},
 
-	step: function(){
-		/*
-			Start timing, or advance the state of the solve.
+	actions: {
+		step: function(){
+			/*
+				Start timing, or advance the state of the solve.
 
-			If the solve is done, stop timing.
-		*/
-		var solve = this.get("solve");
+				If the solve is done, stop timing.
+			*/
+			var solve = this.get("solve");
 
-		if(!this.get("isTiming")){
-			this.set("isTiming", true);
-			this.resetTime();
-			this.timestep();
-		}
-		else if(solve.advance(this.get("time"))){
-			this.resetTime();
-		}
-		else{
-			this.stop();
-		}
-	},
+			if(!this.get("isTiming")){
+				this.set("isTiming", true);
+				this.resetTime();
+				this.timestep();
+			}
+			else if(solve.advance(this.get("time"))){
+				this.resetTime();
+			}
+			else{
+				this.send("stop");
+			}
+		},
 
-	stop: function(){
-		if(!this.get("isTiming")){
-			return;
-		}
+		stop: function(){
+			if(!this.get("isTiming")){
+				return;
+			}
 
-		this.set("isTiming", false);
-		cancelAnimationFrame(this.get("animationHandle"));
+			this.set("isTiming", false);
+			cancelAnimationFrame(this.get("animationHandle"));
 
-		this.logSolve();
+			this.logSolve();
 
-		this.set("solve.currentStepIndex", 0);
-		this.set("time", 0);
+			this.set("solve.currentStepIndex", 0);
+			this.set("time", 0);
+		},
+
+		setScramble: function(scramble){
+			this.get("solve").set("scramble", scramble);
+		},
 	},
 
 	timestep: function(){
