@@ -1,6 +1,6 @@
 /*
 	The Solve model provides some aggregate functionality over 
-	StepResuls, grouping them with an associated Method and scramble.
+	StepResults, grouping them with an associated Method and scramble.
 
 	Only completed Solves should be used for overall solve time tracking,
 	but StepResults can be used without an associated Solve for isolated
