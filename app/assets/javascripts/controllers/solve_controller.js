@@ -20,6 +20,7 @@ Timinator.SolveController = Ember.ObjectController.extend({
 		},
 	},
 
+
 	currentStep: function(){
 		var index = this.get("currentStepIndex");
 		return this.get("controllers.method.steps").objectAt(index);
@@ -40,12 +41,13 @@ Timinator.SolveController = Ember.ObjectController.extend({
 	},
 
 	addTime: function(time){
-		var stepResult = Timinator.StepResult.createRecord({
+		var stepResult = this.store.createRecord("step-result", {
 			solve: this.get("model"),
 			step: this.get("currentStep"),
 			time: time
 		});
-		this.get("store").commit();
+
+		this.get("stepResults").addObject(stepResult);
 	},
 
 	totalDifference: function(){
