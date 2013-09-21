@@ -1,5 +1,5 @@
 Timinator.TimerController = Ember.Controller.extend({
-	needs: ["method", "puzzle", "solve", "solves"],
+	needs: ["method", "puzzle", "solve", "solves", "currentUser"],
 	methodBinding: "controllers.method",
 	puzzleBinding: "controllers.puzzle",
 	solveBinding: "controllers.solve",
@@ -27,12 +27,13 @@ Timinator.TimerController = Ember.Controller.extend({
 	},
 
 	newSolve: function(){
+		var user = this.get("controllers.currentUser.model");
 		var puzzle = this.get("puzzle.model");
 		var method = this.get("method.model");
-		var solve = Timinator.Solve.createRecord({
+		var solve = this.store.createRecord('solve', {
 			datetime: Date.now(),
 			method: method,
-			puzzle: puzzle,
+			user: user,
 			scramble: Timinator.ScrambleGenerator.generate(puzzle)
 		});
 
@@ -44,16 +45,7 @@ Timinator.TimerController = Ember.Controller.extend({
 		this.get("solves").addObject(oldSolve);
 
 		var newSolve = this.newSolve();
-		this.get("solve").set("model", newSolve);
-
-		this.get("store").commit();
-	},
-
-	newStepResult: function(step){
-		var stepResult = Timinator.StepResult.createRecord({
-
-		});
-		return stepResult;
+		this.get("solve").set("model", newSolve);		
 	},
 
 	totalTime: function(){
