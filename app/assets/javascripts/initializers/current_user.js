@@ -6,8 +6,7 @@ Ember.Application.initializer({
         var attributes = $("meta[name='current-user']").attr("content");
 
         if(attributes){
-            var object = store.load(Timinator.User, JSON.parse(attributes));
-            var user = Timinator.User.find(object.id);
+            var user = store.push('user', JSON.parse(attributes));
             var controller = container.lookup("controller:currentUser").set("content", user);
         }
         else{
