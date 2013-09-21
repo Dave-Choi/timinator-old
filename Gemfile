@@ -9,7 +9,7 @@ group :development do
 end
 
 group :development, :test do  
-    gem "jasminerice", :git => 'https://github.com/bradphelan/jasminerice.git'  
+	gem 'qunit-rails'
 end  
 
 group :production do
