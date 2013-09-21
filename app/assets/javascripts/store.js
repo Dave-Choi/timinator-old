@@ -1,22 +1,23 @@
-Timinator.Store = DS.Store.extend({
-	adapter: DS.FixtureAdapter.extend({
-        queryFixtures: function(fixtures, query, type) {
-            console.log(query);
-            console.log(type);
-            console.log(fixtures);
+// Timinator.Store = DS.Store.extend({
+// });
 
-            var records = fixtures.filter(function(item) {
-                for(var prop in query) {
-                    if( item[prop] != query[prop]) {
-                        return false;
-                    }
+Timinator.ApplicationAdapter = DS.FixtureAdapter.extend({
+    queryFixtures: function(fixtures, query, type) {
+        console.log(query);
+        console.log(type);
+        console.log(fixtures);
+
+        var records = fixtures.filter(function(item) {
+            for(var prop in query) {
+                if( item[prop] != query[prop]) {
+                    return false;
                 }
-                return true;
-            });
+            }
+            return true;
+        });
 
-            console.log(records);
+        console.log(records);
 
-            return records;
-        }
-    })
+        return records;
+    }
 });
