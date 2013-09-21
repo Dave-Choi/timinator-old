@@ -32,7 +32,7 @@ Timinator.TimerRoute = Ember.Route.extend({
 
 		$(window).on("keyup.timerController", function(e){
 			if(e.keyCode === spaceCode){
-				timerController.step();
+				timerController.send("step");
 				return false;
 			}
 		});
