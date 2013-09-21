@@ -6,8 +6,8 @@ Timinator.CurrentUserController = Ember.ObjectController.extend({
     }.property("model"),
 
     loadUser: function(user){
-        this.get("store").load(Timinator.User, user);
-        this.set("model", Timinator.User.find(user.id));
+        this.store.push('user', user);
+        this.set("model", this.store.find('user', user.id));
     },
 
     login: function(data){
