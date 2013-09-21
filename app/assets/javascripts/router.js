@@ -48,7 +48,3 @@ Timinator.RegisterRoute = Ember.Route.extend({
 		controller.reset();
 	}
 });
-
-Timinator.HomeRoute = Ember.Route.extend({
-	
-});
