@@ -3,4 +3,6 @@ Timinator.StepResult = DS.Model.extend(Timinator.Trashable, {
 
 	solve: DS.belongsTo("solve"),
 	step: DS.belongsTo("step"),
+
+	userBinding: "solve.user"
 });

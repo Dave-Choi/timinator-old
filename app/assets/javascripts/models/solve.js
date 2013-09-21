@@ -15,6 +15,9 @@ Timinator.Solve = DS.Model.extend(Timinator.Trashable, {
 
 	stepResults: DS.hasMany("step-result", {async: true}),
 	method: DS.belongsTo("method"),
+
+	user: DS.belongsTo("user"),
+
 	puzzleBinding: "method.puzzle",
 
 	totalTime: function(){
