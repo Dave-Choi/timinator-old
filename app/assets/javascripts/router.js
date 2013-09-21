@@ -13,8 +13,8 @@ Timinator.Router.map(function(){
 
 Timinator.ApplicationRoute = Ember.Route.extend({
 	setupController: function(){
-		this.controllerFor("puzzles").set("model", Timinator.Puzzle.find());
-		this.controllerFor("methods").set("model", Timinator.Method.find());
+		this.controllerFor("puzzles").set("model", this.store.find('puzzle'));
+		this.controllerFor("methods").set("model", this.store.find('method'));
 	}
 });
 
