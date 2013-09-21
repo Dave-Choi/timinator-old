@@ -1,5 +1,5 @@
 Timinator.Step = DS.Model.extend({
-	puzzle: DS.belongsTo("Timinator.Puzzle"),
+	puzzle: DS.belongsTo("puzzle"),
 	name: DS.attr("string"),
 	description: DS.attr("string")
 });
