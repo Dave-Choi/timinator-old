@@ -13,10 +13,13 @@ Timinator.SolveController = Ember.ObjectController.extend({
 	*/
 	currentStepIndex: 0,
 
-	toggleTrashed: function(){
-		// This doesn't get automatically forwarded to the model, and I'm not sure why.
-		this.get("model").toggleTrashed();
+	actions: {
+		toggleTrashed: function(){
+			// This doesn't get automatically forwarded to the model, and I'm not sure why.
+			this.get("model").toggleTrashed();
+		},
 	},
+
 
 	currentStep: function(){
 		var index = this.get("currentStepIndex");
@@ -38,12 +41,13 @@ Timinator.SolveController = Ember.ObjectController.extend({
 	},
 
 	addTime: function(time){
-		var stepResult = Timinator.StepResult.createRecord({
+		var stepResult = this.store.createRecord("step-result", {
 			solve: this.get("model"),
 			step: this.get("currentStep"),
 			time: time
 		});
-		this.get("store").commit();
+
+		this.get("stepResults").addObject(stepResult);
 	},
 
 	totalDifference: function(){

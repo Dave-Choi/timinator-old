@@ -13,8 +13,8 @@ Timinator.Router.map(function(){
 
 Timinator.ApplicationRoute = Ember.Route.extend({
 	setupController: function(){
-		this.controllerFor("puzzles").set("model", Timinator.Puzzle.find());
-		this.controllerFor("methods").set("model", Timinator.Method.find());
+		this.controllerFor("puzzles").set("model", this.store.find('puzzle'));
+		this.controllerFor("methods").set("model", this.store.find('method'));
 	}
 });
 
@@ -32,7 +32,7 @@ Timinator.TimerRoute = Ember.Route.extend({
 
 		$(window).on("keyup.timerController", function(e){
 			if(e.keyCode === spaceCode){
-				timerController.step();
+				timerController.send("step");
 				return false;
 			}
 		});
@@ -47,8 +47,4 @@ Timinator.RegisterRoute = Ember.Route.extend({
 	setupController: function(controller, context){
 		controller.reset();
 	}
-});
-
-Timinator.HomeRoute = Ember.Route.extend({
-	
 });

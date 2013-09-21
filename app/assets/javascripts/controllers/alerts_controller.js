@@ -6,6 +6,12 @@ Timinator.AlertsController = Ember.Controller.extend({
 		this.set("alerts", []);
 	},
 
+	actions: {
+		dismiss: function(alert){
+			this.get("alerts").removeObject(alert);
+		}
+	},
+
 	addAlert: function(message, type, duration){
 		var alert = Timinator.Alert.create({
 			message: message,
@@ -14,9 +20,5 @@ Timinator.AlertsController = Ember.Controller.extend({
 		});
 
 		this.get("alerts").addObject(alert);
-	},
-
-	dismiss: function(alert){
-		this.get("alerts").removeObject(alert);
 	}
 });

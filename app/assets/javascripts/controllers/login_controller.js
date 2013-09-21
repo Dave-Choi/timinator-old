@@ -16,16 +16,29 @@ Timinator.LoginController = Ember.Controller.extend({
 
 	shouldShowForm: false,
 
-	toggleFormDisplay: function(){
-		this.toggleProperty("shouldShowForm");
-		this.reset();
-	},
-
 	reset: function(){
 		this.setProperties({
 			email: "",
 			password: ""
 		});
+	},
+
+	actions: {
+		toggleFormDisplay: function(){
+			this.toggleProperty("shouldShowForm");
+			this.reset();
+		},		
+
+		login: function(){
+			if(this.get("isInputIncomplete")){
+				this.get("controllers.alerts").addAlert("Missing fields.");
+			}
+			else{
+				var currentUser = this.get("controllers.currentUser");
+				var data = this.get("data");
+				currentUser.login(data);
+			}
+		}
 	},
 
 	userChanged: function(){
@@ -51,16 +64,5 @@ Timinator.LoginController = Ember.Controller.extend({
 	isInputIncomplete: function(){
 		// Just make sure there's something for each field.
 		return !(this.get("email") && this.get("password"));
-	}.property("email", "password"),
-
-	login: function(){
-		if(this.get("isInputIncomplete")){
-			this.get("controllers.alerts").addAlert("Missing fields.");
-		}
-		else{
-			var currentUser = this.get("controllers.currentUser");
-			var data = this.get("data");
-			currentUser.login(data);
-		}
-	}
+	}.property("email", "password")
 });

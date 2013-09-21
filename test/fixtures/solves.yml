@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  datetime: 2013-09-19 18:00:01
+  scramble: MyString
+
+two:
+  datetime: 2013-09-19 18:00:01
+  scramble: MyString

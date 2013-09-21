@@ -1,8 +1,44 @@
-Timinator.Step = DS.Model.extend({
-	puzzle: DS.belongsTo("puzzle"),
-	name: DS.attr("string"),
-	description: DS.attr("string")
-});
+Timinator.Method.FIXTURES = [
+	{
+		id: 1,
+		puzzle: 1,
+		name: "No Breakdown",
+		steps: [
+			9 // Full Solve
+		]
+	},
+	{
+		id: 2,
+		puzzle: 1,
+		name: "CFOP",
+		steps: [
+			1,	// Cross
+			2,	// F2L
+			3,	// OLL
+			4	// PLL
+		]
+	},
+	{
+		id: 3,
+		puzzle: 1,
+		name: "Roux",
+		steps: [
+			5, //	F2B-1
+			6, //	F2B-2
+			7, //	CMLL
+			8 //	L6E
+		]
+	}
+];
+
+Timinator.Puzzle.FIXTURES = [
+	{
+		id: 1,
+		name: "3x3x3",
+		slug: "3x3x3",
+		methods: [1, 2, 3]
+	}
+];
 
 Timinator.Step.FIXTURES = [
 	{

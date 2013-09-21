@@ -1,5 +1,5 @@
 Timinator.TimerController = Ember.Controller.extend({
-	needs: ["method", "puzzle", "solve", "solves"],
+	needs: ["method", "puzzle", "solve", "solves", "currentUser"],
 	methodBinding: "controllers.method",
 	puzzleBinding: "controllers.puzzle",
 	solveBinding: "controllers.solve",
@@ -27,12 +27,13 @@ Timinator.TimerController = Ember.Controller.extend({
 	},
 
 	newSolve: function(){
+		var user = this.get("controllers.currentUser.model");
 		var puzzle = this.get("puzzle.model");
 		var method = this.get("method.model");
-		var solve = Timinator.Solve.createRecord({
+		var solve = this.store.createRecord('solve', {
 			datetime: Date.now(),
 			method: method,
-			puzzle: puzzle,
+			user: user,
 			scramble: Timinator.ScrambleGenerator.generate(puzzle)
 		});
 
@@ -44,16 +45,7 @@ Timinator.TimerController = Ember.Controller.extend({
 		this.get("solves").addObject(oldSolve);
 
 		var newSolve = this.newSolve();
-		this.get("solve").set("model", newSolve);
-
-		this.get("store").commit();
-	},
-
-	newStepResult: function(step){
-		var stepResult = Timinator.StepResult.createRecord({
-
-		});
-		return stepResult;
+		this.get("solve").set("model", newSolve);		
 	},
 
 	totalTime: function(){
@@ -61,47 +53,50 @@ Timinator.TimerController = Ember.Controller.extend({
 		return Timinator.Math.thousandthPrecision(total);
 	}.property("solve.totalTime", "time"),
 
-	setScramble: function(scramble){
-		this.get("solve").set("scramble", scramble);
-	},
 
 	resetTime: function(){
 		this.set("startTime", Date.now());
 	},
 
-	step: function(){
-		/*
-			Start timing, or advance the state of the solve.
+	actions: {
+		step: function(){
+			/*
+				Start timing, or advance the state of the solve.
 
-			If the solve is done, stop timing.
-		*/
-		var solve = this.get("solve");
+				If the solve is done, stop timing.
+			*/
+			var solve = this.get("solve");
 
-		if(!this.get("isTiming")){
-			this.set("isTiming", true);
-			this.resetTime();
-			this.timestep();
-		}
-		else if(solve.advance(this.get("time"))){
-			this.resetTime();
-		}
-		else{
-			this.stop();
-		}
-	},
+			if(!this.get("isTiming")){
+				this.set("isTiming", true);
+				this.resetTime();
+				this.timestep();
+			}
+			else if(solve.advance(this.get("time"))){
+				this.resetTime();
+			}
+			else{
+				this.send("stop");
+			}
+		},
 
-	stop: function(){
-		if(!this.get("isTiming")){
-			return;
-		}
+		stop: function(){
+			if(!this.get("isTiming")){
+				return;
+			}
 
-		this.set("isTiming", false);
-		cancelAnimationFrame(this.get("animationHandle"));
+			this.set("isTiming", false);
+			cancelAnimationFrame(this.get("animationHandle"));
 
-		this.logSolve();
+			this.logSolve();
 
-		this.set("solve.currentStepIndex", 0);
-		this.set("time", 0);
+			this.set("solve.currentStepIndex", 0);
+			this.set("time", 0);
+		},
+
+		setScramble: function(scramble){
+			this.get("solve").set("scramble", scramble);
+		},
 	},
 
 	timestep: function(){

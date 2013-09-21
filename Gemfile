@@ -9,7 +9,7 @@ group :development do
 end
 
 group :development, :test do  
-    gem "jasminerice", :git => 'https://github.com/bradphelan/jasminerice.git'  
+	gem 'qunit-rails'
 end  
 
 group :production do
@@ -35,7 +35,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 gem 'ember-rails'
-gem 'ember-source', '1.0.0.rc6.2'
+gem 'ember-source', '~> 1.0.0'
+gem "ember-data-source", "~> 1.0.0.beta.2"
 gem 'handlebars-source', '~> 1.0.12'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

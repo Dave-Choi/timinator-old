@@ -59,30 +59,31 @@ Timinator.RegisterController = Ember.Controller.extend({
 		);
 	}.property("email", "password", "passwordConfirmation"),
 
-
-	register: function(){
-		var shouldRegister = true;
-		if(!this.get("fieldsPopulated")){
-			this.get("alerts").addAlert("Missing fields.");
-			shouldRegister = false;
-		}
-		if(this.get("passwordTooShort")){
-			this.get("alerts").addAlert("Your password is too short.")
-			shouldRegister = false;
-		}
-		if(!this.get("passwordsMatch")){
-			this.get("alerts").addAlert("Your password confirmation doesn't match your password.")
-			shouldRegister = false;
-		}
-		if(!this.get("passwordsMatch")){
-			this.get("alerts").addAlert("Your password confirmation doesn't match your password.")
-			shouldRegister = false;
-		}
-		
-		if(shouldRegister){
-			var currentUser = this.get("controllers.currentUser");
-			var data = this.get("data");
-			currentUser.register(data);
+	actions: {
+		register: function(){
+			var shouldRegister = true;
+			if(!this.get("fieldsPopulated")){
+				this.get("alerts").addAlert("Missing fields.");
+				shouldRegister = false;
+			}
+			if(this.get("passwordTooShort")){
+				this.get("alerts").addAlert("Your password is too short.")
+				shouldRegister = false;
+			}
+			if(!this.get("passwordsMatch")){
+				this.get("alerts").addAlert("Your password confirmation doesn't match your password.")
+				shouldRegister = false;
+			}
+			if(!this.get("passwordsMatch")){
+				this.get("alerts").addAlert("Your password confirmation doesn't match your password.")
+				shouldRegister = false;
+			}
+			
+			if(shouldRegister){
+				var currentUser = this.get("controllers.currentUser");
+				var data = this.get("data");
+				currentUser.register(data);
+			}
 		}
 	}
 });

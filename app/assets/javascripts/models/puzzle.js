@@ -2,7 +2,7 @@ Timinator.Puzzle = DS.Model.extend({
 	name: DS.attr("string"),
 	slug: DS.attr("string"),
 
-	methods: DS.hasMany("Timinator.Method"),
+	methods: DS.hasMany("method", {async: true}),
 });
 
 
