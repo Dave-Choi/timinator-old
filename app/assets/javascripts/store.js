@@ -1,6 +1,3 @@
-// Timinator.Store = DS.Store.extend({
-// });
-
 Timinator.ApplicationAdapter = DS.FixtureAdapter.extend({
     queryFixtures: function(fixtures, query, type) {
         console.log(query);
