@@ -1,6 +1,6 @@
 Timinator.SolvesController = Ember.ArrayController.extend({
-	needs: ["method"],
-	methodBinding: "controllers.method",
+	needs: ["solveMethod"],
+	solveMethodBinding: "controllers.solveMethod",
 
 	totalMeanAverage: function(){
 		var numComplete = 0;
@@ -55,7 +55,7 @@ Timinator.SolvesController = Ember.ArrayController.extend({
 	},
 
 	stepStats: function(){
-		var steps = this.get("method.steps");
+		var steps = this.get("solveMethod.steps");
 		var controller = this;
 		var totalMeanAverage = this.get("totalMeanAverage");
 
@@ -69,7 +69,7 @@ Timinator.SolvesController = Ember.ArrayController.extend({
 			};
 		});
 	}.property(
-		"method.steps.@each",
+		"solveMethod.steps.@each",
 		"@each.stepResults.@each.time",
 		"@each.isTrashed" /* 
 			It makes me uncomfortable that this is here but it's dependent

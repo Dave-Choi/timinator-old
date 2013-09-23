@@ -1,12 +1,12 @@
 /*
 	The Solve model provides some aggregate functionality over 
-	StepResults, grouping them with an associated Method and scramble.
+	StepResults, grouping them with an associated SolveMethod and scramble.
 
 	Only completed Solves should be used for overall solve time tracking,
 	but StepResults can be used without an associated Solve for isolated
-	step drills, which can traverse Methods (e.g. The Cross is used
+	step drills, which can traverse SolveMethods (e.g. The Cross is used
 	in CFOP and some beginner methods), and should therefore be tracked 
-	independently of Methods.
+	independently of SolveMethods.
 */
 
 Timinator.Solve = DS.Model.extend(Timinator.Trashable, {
@@ -14,11 +14,11 @@ Timinator.Solve = DS.Model.extend(Timinator.Trashable, {
 	scramble: DS.attr("string"),
 
 	stepResults: DS.hasMany("step-result", {async: true}),
-	method: DS.belongsTo("method"),
+	solveMethod: DS.belongsTo("solveMethod"),
 
 	user: DS.belongsTo("user"),
 
-	puzzleBinding: "method.puzzle",
+	puzzleBinding: "solveMethod.puzzle",
 
 	totalTime: function(){
 		var stepResults = this.get("stepResults");
@@ -32,10 +32,10 @@ Timinator.Solve = DS.Model.extend(Timinator.Trashable, {
 	isComplete: function(){
 		/*
 			A Solve is considered complete if there exists a StepResult
-			for each Step in the Solve's Method.
+			for each Step in the Solve's SolveMethod.
 		*/
 		var stepResults = this.get("stepResults");
-		var steps = this.get("method.steps");
+		var steps = this.get("solveMethod.steps");
 
 		// Check for count mismatch first, because the rest is really inefficient.
 		if(stepResults.get("length") != steps.get("length")){

@@ -1,4 +1,4 @@
-Timinator.Method = DS.Model.extend({
+Timinator.SolveMethod = DS.Model.extend({
 	name: DS.attr("string"),
 	steps: DS.hasMany("step", {async: true}),
 	puzzle: DS.belongsTo("puzzle"),
@@ -8,7 +8,7 @@ Timinator.Method = DS.Model.extend({
 	}.property("steps.length")
 });
 
-Timinator.Method.FIXTURES = [
+Timinator.SolveMethod.FIXTURES = [
 	{
 		id: 1,
 		puzzle: 1,

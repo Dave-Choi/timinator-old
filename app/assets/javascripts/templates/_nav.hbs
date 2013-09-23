@@ -17,7 +17,7 @@
 								{{puzzle.name}}<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								{{#each puzzle.methods}}
+								{{#each puzzle.solveMethods}}
 									<li>{{#linkTo "timer" puzzle this}}{{name}}{{/linkTo}}</li>
 								{{/each}}
 							</ul>

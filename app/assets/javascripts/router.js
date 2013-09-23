@@ -1,6 +1,6 @@
 Timinator.Router.map(function(){
 	this.resource("puzzle", { path: ":puzzle_id" }, function(){
-		this.resource("method", { path: ":method_id" }, function(){
+		this.resource("solveMethod", { path: ":solve_method_id" }, function(){
 			this.resource("timer");
 			this.route("stats");
 			//this.resource("steps");
@@ -14,7 +14,7 @@ Timinator.Router.map(function(){
 Timinator.ApplicationRoute = Ember.Route.extend({
 	setupController: function(){
 		this.controllerFor("puzzles").set("model", this.store.find('puzzle'));
-		this.controllerFor("methods").set("model", this.store.find('method'));
+		// this.controllerFor("solveMethods").set("model", this.store.find('solveMethod'));
 	}
 });
 

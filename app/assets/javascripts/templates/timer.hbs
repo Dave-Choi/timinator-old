@@ -1,9 +1,9 @@
 <div class="row-fluid">
-	<h2>{{puzzle.name}}: {{method.name}}</h2>
+	<h2>{{puzzle.name}}: {{solveMethod.name}}</h2>
 	<h4>Scramble: {{solve.scramble}}</h4>
 	<div>
 		<div class="timeDisplay">
-			{{#if method.isMultiStep}}
+			{{#if solveMethod.isMultiStep}}
 				<h3>{{solve.currentStep.name}}: {{time time}}</h3>		
 			{{/if}}
 			<h2>Total: {{time totalTime}}</h2>
@@ -22,7 +22,7 @@
 			<tr>
 				<th> {{! Extra space for controls column }}</th>
 				<th>Total ({{solves.totalMeanAverage}})</th>
-				{{#if method.isMultiStep}}
+				{{#if solveMethod.isMultiStep}}
 					{{#each solves.stepStats}}
 						<th {{bindAttr class="active"}}>{{name}} ({{time average}} - {{percentage percentOfTotal}})</th>
 					{{/each}}

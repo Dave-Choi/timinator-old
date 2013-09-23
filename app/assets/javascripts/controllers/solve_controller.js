@@ -4,7 +4,7 @@
 */
 
 Timinator.SolveController = Ember.ObjectController.extend({
-	needs: ["method", "solves"], /*
+	needs: ["solveMethod", "solves"], /*
 		Setting bindings from this controller breaks.  
 
 		I suspect it's got something to do with their generation 
@@ -23,13 +23,13 @@ Timinator.SolveController = Ember.ObjectController.extend({
 
 	currentStep: function(){
 		var index = this.get("currentStepIndex");
-		return this.get("controllers.method.steps").objectAt(index);
-	}.property("currentStepIndex", "controllers.method.steps.@each"),
+		return this.get("controllers.solveMethod.steps").objectAt(index);
+	}.property("currentStepIndex", "controllers.solveMethod.steps.@each"),
 
 	advance: function(time){
 		this.addTime(time);
 		var index = this.get("currentStepIndex");
-		var numSteps = this.get("controllers.method.steps.length");
+		var numSteps = this.get("controllers.solveMethod.steps.length");
 		if(index < numSteps - 1){
 			this.incrementProperty("currentStepIndex");
 			return true;

@@ -1,7 +1,7 @@
 Timinator.SolvesAreaGraphView = Ember.View.extend({
 	tagName: "svg",
 	solvesBinding: "controller.model",
-	stepsBinding: "controller.model.method.steps",
+	stepsBinding: "controller.model.solveMethod.steps",
 
 	chart: null,
 
@@ -77,7 +77,7 @@ Timinator.SolvesAreaGraphView = Ember.View.extend({
 			completed have to have 0s inserted.
 
 			Solves are iterated through linearly once: O(n)
-			Method Steps are iterated through linearly 4 times: O(4n) 
+			SolveMethod Steps are iterated through linearly 4 times: O(4n) 
 		*/
 		var solves = this.get("solves");
 		if(solves.get("length") === 0){

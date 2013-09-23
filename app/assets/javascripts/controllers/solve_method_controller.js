@@ -1,4 +1,4 @@
-Timinator.MethodController = Ember.ObjectController.extend({
+Timinator.SolveMethodController = Ember.ObjectController.extend({
 
 	stepNames: function(){
 		return this.get("steps").mapProperty("name");
