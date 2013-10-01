@@ -18,3 +18,7 @@ pickle-email-*.html
 .project
 
 .DS_Store
+
+vendor/assets/.DS_Store
+
+vendor/assets/.DS_Store
