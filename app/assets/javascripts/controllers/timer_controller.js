@@ -21,12 +21,15 @@ Timinator.SolveMethodTimerController = Ember.Controller.extend({
 		var user = this.get("controllers.currentUser.model");
 		var puzzle = this.get("puzzle.model");
 		var solveMethod = this.get("solveMethod.model");
+		var scramble = Timinator.ScrambleGenerator.generate(puzzle);
+
 		var solve = this.store.createRecord('solve', {
-			datetime: Date.now(),
 			solveMethod: solveMethod,
 			user: user,
-			scramble: Timinator.ScrambleGenerator.generate(puzzle)
+			scramble: scramble
 		});
+
+		solve.save();
 
 		return solve;
 	},
