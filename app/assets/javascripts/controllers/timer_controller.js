@@ -17,12 +17,6 @@ Timinator.SolveMethodTimerController = Ember.Controller.extend({
 		this.get("solve").set("model", this.newSolve());
 	}.observes("solveMethod.model"),
 
-	init: function(){
-		this._super();
-
-		this.get("solve").set("model", this.newSolve());
-	},
-
 	newSolve: function(){
 		var user = this.get("controllers.currentUser.model");
 		var puzzle = this.get("puzzle.model");
