@@ -41,7 +41,7 @@ Timinator.SolveController = Ember.ObjectController.extend({
 	},
 
 	addTime: function(time){
-		var stepResult = this.store.createRecord("step-result", {
+		var stepResult = this.store.createRecord("stepResult", {
 			solve: this.get("model"),
 			step: this.get("currentStep"),
 			time: time
