@@ -1,4 +1,6 @@
-Timinator.ApplicationAdapter = DS.FixtureAdapter.extend({
+// Timinator.ApplicationAdapter = DS.FixtureAdapter.extend({
+// Timinator.ApplicationAdapter = DS.RESTAdapter.extend({
+Timinator.ApplicationAdapter = DS.ActiveModelAdapter.extend({
     queryFixtures: function(fixtures, query, type) {
         console.log(query);
         console.log(type);
