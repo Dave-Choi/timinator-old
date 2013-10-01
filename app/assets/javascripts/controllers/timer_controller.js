@@ -1,4 +1,4 @@
-Timinator.TimerController = Ember.Controller.extend({
+Timinator.SolveMethodTimerController = Ember.Controller.extend({
 	needs: ["solveMethod", "puzzle", "solve", "solves", "currentUser"],
 	solveMethodBinding: "controllers.solveMethod",
 	puzzleBinding: "controllers.puzzle",
