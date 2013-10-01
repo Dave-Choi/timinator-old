@@ -10,7 +10,6 @@
 */
 
 Timinator.Solve = DS.Model.extend(Timinator.Trashable, {
-	datetime: DS.attr("date"),
 	scramble: DS.attr("string"),
 
 	stepResults: DS.hasMany("step-result", {async: true}),
