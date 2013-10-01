@@ -67,8 +67,14 @@ GEM
     font-awesome-rails (3.2.1.2)
       railties (>= 3.2, < 5.0)
     handlebars-source (1.0.12)
+    has_scope (0.6.0.rc)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
     hike (1.2.3)
     i18n (0.6.4)
+    inherited_resources (1.4.1)
+      has_scope (~> 0.6.0.rc)
+      responders (~> 1.0.0.rc)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
     jquery-rails (3.0.4)
@@ -105,6 +111,8 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    responders (1.0.0)
+      railties (>= 3.2, < 5)
     sass (3.2.9)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -152,6 +160,7 @@ DEPENDENCIES
   ember-source (~> 1.0.0)
   font-awesome-rails (= 3.2.1.2)
   handlebars-source (~> 1.0.12)
+  inherited_resources
   jbuilder (~> 1.0.1)
   jquery-rails
   pg
