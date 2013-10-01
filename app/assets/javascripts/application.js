@@ -29,6 +29,7 @@ window.cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAni
 // for more details see: http://emberjs.com/guides/application/
 Timinator = Ember.Application.create({
 	LOG_TRANSITIONS: true,
+	LOG_TRANSITIONS_INTERNAL: true,
 	routes: function(){
         return this.Router.router.recognizer.names;
     }
@@ -38,6 +39,11 @@ Ember.ArrayController.reopen({
 	reverse: function(){
 		return this.get('model').toArray().reverse();
     }.property('model.@each')
+});
+
+Ember.RSVP.configure('onerror', function(e) {
+  console.log(e.message); 
+  console.log(e.stack);
 });
 
 //= require_tree .
