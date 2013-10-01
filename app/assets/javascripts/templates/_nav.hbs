@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 			</a>
 
-			{{#linkTo "index" class="brand"}}Timinator{{/linkTo}}
+			{{#link-to "index" class="brand"}}Timinator{{/link-to}}
 
 			<div class="nav-collapse collapse">
 				<ul class="nav">
@@ -18,7 +18,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								{{#each puzzle.solveMethods}}
-									<li>{{#linkTo "timer" puzzle this}}{{name}}{{/linkTo}}</li>
+									<li>{{#link-to "solveMethod.timer" puzzle this}}{{name}}{{/link-to}}</li>
 								{{/each}}
 							</ul>
 						</li>
