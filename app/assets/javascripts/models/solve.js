@@ -12,7 +12,7 @@
 Timinator.Solve = DS.Model.extend(Timinator.Trashable, {
 	scramble: DS.attr("string"),
 
-	stepResults: DS.hasMany("step-result", {async: true}),
+	stepResults: DS.hasMany("stepResult", {async: true}),
 	solveMethod: DS.belongsTo("solveMethod"),
 
 	user: DS.belongsTo("user"),
