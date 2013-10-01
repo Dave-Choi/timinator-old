@@ -1,4 +1,6 @@
-Timinator.ScrambleGenerator = Ember.Object.create({
+Timinator.ScrambleGenerator = Ember.Object.extend();
+
+Timinator.ScrambleGenerator.reopenClass({
 	generate: function(puzzle){
 		var slug = puzzle.get("slug");
 		return this["generate" + slug]();
