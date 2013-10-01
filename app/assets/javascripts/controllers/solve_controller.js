@@ -46,8 +46,8 @@ Timinator.SolveController = Ember.ObjectController.extend({
 			step: this.get("currentStep"),
 			time: time
 		});
-
-		this.get("stepResults").addObject(stepResult);
+		stepResult.save();
+		this.get("stepResults").addObject(stepResult);		
 	},
 
 	totalDifference: function(){
