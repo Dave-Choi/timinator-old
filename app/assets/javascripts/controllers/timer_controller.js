@@ -35,11 +35,27 @@ Timinator.SolveMethodTimerController = Ember.Controller.extend({
 	},
 
 	logSolve: function(){
+		/*
+			This is throwing out a lot of requests, and is not
+			my preferred behavior, but is what I could get to work.
+
+			The current behavior is to save Solves, as they're created, and
+			StepResults as they're created during a solve.
+
+			This allows the Solve to obtain an ID that the StepResults can
+			reference when they're being saved.
+
+
+			What I'd prefer is to not save the Solve to the server until
+			it's resolved, at which point, I'd like to save it, then save
+			all of the StepResults, or do it with embedded StepResults.
+		*/		
+
 		var oldSolve = this.get("solve.model");
-		this.get("solves").addObject(oldSolve);
+		this.get("solves").pushObject(oldSolve);
 
 		var newSolve = this.newSolve();
-		this.get("solve").set("model", newSolve);		
+		this.get("solve").set("model", newSolve);
 	},
 
 	totalTime: function(){
