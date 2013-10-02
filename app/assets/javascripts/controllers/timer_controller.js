@@ -113,7 +113,8 @@ Timinator.SolveMethodTimerController = Ember.Controller.extend({
 		if(!this.get("isTiming")){
 			return;
 		}
-		var elapsed = Timinator.Math.msInSeconds(Date.now() - this.get("startTime"));
+		var elapsed = Date.now() - this.get("startTime");
+
 		this.set("time", elapsed);
 
 		var timer = this;

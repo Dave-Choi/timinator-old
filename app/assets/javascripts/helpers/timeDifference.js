@@ -8,7 +8,7 @@
 
 Ember.Handlebars.helper("timeDifference", function(value){
 	var className = "text-success";
-	value = Timinator.Math.thousandthPrecision(value);
+	value = Timinator.Math.thousandthPrecision(value/1000);
 	if(value > 0){
 		className = "text-error";
 		value = "+" + value;
