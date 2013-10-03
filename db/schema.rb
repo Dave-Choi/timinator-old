@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130926073410) do
+ActiveRecord::Schema.define(version: 20131003094558) do
 
   create_table "puzzles", force: true do |t|
     t.string   "name"
@@ -40,9 +40,11 @@ ActiveRecord::Schema.define(version: 20130926073410) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "solve_method_id"
+    t.integer  "total_time"
   end
 
   add_index "solves", ["solve_method_id"], name: "index_solves_on_solve_method_id"
+  add_index "solves", ["total_time"], name: "index_solves_on_total_time"
   add_index "solves", ["user_id"], name: "index_solves_on_user_id"
 
   create_table "step_results", force: true do |t|
