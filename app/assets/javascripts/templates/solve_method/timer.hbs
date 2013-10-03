@@ -21,7 +21,7 @@
 		<thead>
 			<tr>
 				<th> {{! Extra space for controls column }}</th>
-				<th>Total ({{solves.totalMeanAverage}})</th>
+				<th>Total ({{time solves.totalMeanAverage}})</th>
 				{{#if solveMethod.isMultiStep}}
 					{{#each solves.stepStats}}
 						<th {{bindAttr class="active"}}>{{name}} ({{time average}} - {{percentage percentOfTotal}})</th>
